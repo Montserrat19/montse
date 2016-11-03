@@ -25,26 +25,8 @@ console.log(`>Recurso Solicitado: ${path}`);
 var ext = path;
 var resp = ext.split(".");
 
+var mimeType = mime.lookup(path);
 
-switch(ext[2]){
-    case'html':
-    res.writeHead(200,{
-        'Content-Type':'text/html'
-    });
-    breack;
-    case'js':
-    res.writeHead(200,{
-        'Content-Type':'text/javascript'
-    });
-breack;
-case'css':
-res.writeHead(200,{
-    'Content-Type':'text/css'
-});
-breack;
-default:
-break;
-}
 fs.readFile(path,'utf8', 
 function(err, Content){
     if(err){
@@ -55,7 +37,10 @@ function(err, Content){
     res.end("Error 500: Iternal Error...");
 }else{
     //TODO: si sirve el archivo
-    console.log(">Se sirve el archivo: ./static/index.html");
+    res.writeHead(200,{
+        'Content-Type':mimeType
+    });
+    console.log(`>Se sirve el archivo: ${path}`.info);
 res.end(Content);
 }
 
