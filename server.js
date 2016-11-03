@@ -2,6 +2,7 @@ var http = require('http');
 var colors = require('colors');
 var fs = require('fs');
 var mime = require('mime');
+var path = require('path');
 
 //cargando configuraciones
 var config = require('./config/config.js');
@@ -13,21 +14,22 @@ var PORT = config.PORT;
 
 var server = http.createServer(function(req, res){// codigo de nuestro server
 //extrayendo el path de la URL
-var path = req.url;
+var urlpath = req.url;
 //normalizando el path
-if(path==="/"){
-    path ="./static/index.html";
+if(urlpath==="/"){
+    urlpath =path.resolve('./static/index.html');
 }else{
-    path ='./static'+path;
+    urlpath = path.resolve('./static'+ urlpath);
 }
-console.log(`>Recurso Solicitado: ${path}`);
+console.log(`>Recurso Solicitado: ${urlpath}`.data);
 //Decidiendo el content.Type en funcion de la extencion del archivo solicitado
-var ext = path;
-var resp = ext.split(".");
 
-var mimeType = mime.lookup(path);
 
-fs.readFile(path,'utf8', 
+var mimeType = mime.lookup(urlpath);
+console.log(`>mime detectado: ${MimeType}`);
+
+
+fs.readFile(urlpath,
 function(err, Content){
     if(err){
     console.log(`> Error al leer archivo: ${err}`);
@@ -40,7 +42,7 @@ function(err, Content){
     res.writeHead(200,{
         'Content-Type':mimeType
     });
-    console.log(`>Se sirve el archivo: ${path}`.info);
+    console.log(`>Se sirve el archivo: ${urlpath}`.info);
 res.end(Content);
 }
 
