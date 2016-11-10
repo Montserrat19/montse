@@ -3,6 +3,7 @@ var colors = require('colors');
 var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
+var staticServer = require('./internals/static-server');
 
 //cargando configuraciones
 var config = require('./config/config.js');
@@ -15,39 +16,12 @@ var PORT = config.PORT;
 var server = http.createServer(function(req, res){// codigo de nuestro server
 //extrayendo el path de la URL
 var urlpath = req.url;
-//normalizando el path
+//normalizando el path en caso de no se pida ningun recurso
 if(urlpath==="/"){
-    urlpath =path.resolve('./static/index.html');
-}else{
-    urlpath = path.resolve('./static'+ urlpath);
+    urlpath = ('/index.html');
 }
-console.log(`>Recurso Solicitado: ${urlpath}`.data);
-//Decidiendo el content.Type en funcion de la extencion del archivo solicitado
-
-
-var mimeType = mime.lookup(urlpath);
-console.log(`>mime detectado: ${MimeType}`);
-
-
-fs.readFile(urlpath,
-function(err, Content){
-    if(err){
-    console.log(`> Error al leer archivo: ${err}`);
-    res.writeHead(500,{
-        'Content-Type':'text/plain'
-    });
-    res.end("Error 500: Iternal Error...");
-}else{
-    //TODO: si sirve el archivo
-    res.writeHead(200,{
-        'Content-Type':mimeType
-    });
-    console.log(`>Se sirve el archivo: ${urlpath}`.info);
-res.end(Content);
-}
-
-});
-    
+    //se llama al servidor statico
+  staticServer.serve(urlpath,res);
 });
 
 server.listen(PORT,IP, function(){
