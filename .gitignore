@@ -1,1 +1,5 @@
 #ignorando modulos del backend
+node_modules
+
+#ignorando molulos frontend
+static/vendor

@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Mi sitio asombroso</title>
+    <link rel="icon" type= "image/png" href="../img/galleta.png"/>
+    <link rel="stylesheet" href="./vendor/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="../css/static.css">
 </head>
 <body>
      <h1>Galleta de la Fortuna</h1>
      <p>Si desea saber su Fortuna haga click en el siguiente boton</p>
 
      <p><button onclick="fortuna()">romper galleta</button></p>
-
-     <script> var fortuna = function(){
-         alert(`Si la felicidad queres encontrar a tu admirador debes amar`);
-     };
-     </script>
+     
+     <!-- importando script sweet alert -->
+<script src="./vendor/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/static.js"></script>
 </body>
 </html>

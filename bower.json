@@ -1,0 +1,22 @@
+{
+  "name": "08fortune_cookie",
+  "description": "proyecto final de paw",
+  "main": "server.js",
+  "license": "ISC",
+  "keywords": [
+    "http_server"
+  ],
+  "homepage": "https://github.com/Montserrat19/montse",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "^1.1.3"
+  }
+}
